@@ -9,49 +9,52 @@ while testcase:
         for col in range(1, columns + 1):
             table[row][col] = col_list[col_list_ind]
             col_list_ind += 1
-    print(table)
+
     currentMax = 0
-    # Down Border
+    currentMaxDown = 0
+    currentMaxUp = 0
+    currentMaxLeft = 0
+    currentMaxRight = 0
+
     for i in range(1, rows + 1):
-        maxBorder = 0
+
+        maxBorderDown = 0
+        maxBorderUp = 0
+        maxBorderLeft = 0
+        maxBorderRight = 0
         for j in range(1, columns + 1):
+            # Down Border
             if table[i][j] == "#" and table[i + 1][j] != "#":
-                maxBorder += 1
+                maxBorderDown += 1
             if table[i][j] == "#" and table[i + 1][j] == "#":
-                maxBorder = 0
-            if currentMax < maxBorder:
-                currentMax = maxBorder
+                maxBorderDown = 0
+            if currentMaxDown < maxBorderDown:
+                currentMaxDown = maxBorderDown
 
-    # Up Border
-    for i in range(1, rows + 1):
-        maxBorder = 0
-        for j in range(1, columns + 1):
+            # Up Border
             if table[i][j] == "#" and table[i - 1][j] != "#":
-                maxBorder += 1
+                maxBorderUp += 1
             if table[i][j] == "#" and table[i - 1][j] == "#":
-                maxBorder = 0
-            if currentMax < maxBorder:
-                currentMax = maxBorder
+                maxBorderUp = 0
+            if currentMaxUp < maxBorderUp:
+                currentMaxUp = maxBorderUp
 
-    # Left Border
-    for i in range(1, rows + 1):
-        maxBorder = 0
-        for j in range(1, columns + 1):
+            # Left Border
             if table[i][j] == "#" and table[i][j - 1] != "#":
-                maxBorder += 1
+                maxBorderLeft += 1
             if table[i][j] == "#" and table[i][j - 1] == "#":
-                maxBorder = 0
-            if currentMax < maxBorder:
-                currentMax = maxBorder
-    # Right Border
-    for i in range(1, rows + 1):
-        maxBorder = 0
-        for j in range(1, columns + 1):
+                maxBorderLeft = 0
+            if currentMaxLeft < maxBorderLeft:
+                currentMaxLeft = maxBorderLeft
+
+            # Right Border
             if table[i][j] == "#" and table[i][j + 1] != "#":
-                maxBorder += 1
+                maxBorderRight += 1
             if table[i][j] == "#" and table[i][j + 1] == "#":
-                maxBorder = 0
-            if currentMax < maxBorder:
-                currentMax = maxBorder
+                maxBorderRight = 0
+            if currentMaxRight < maxBorderRight:
+                currentMaxRight = maxBorderRight
+
+    currentMax = max(currentMaxDown, currentMaxUp, currentMaxLeft, currentMaxRight)
     print(currentMax)
     testcase -= 1
